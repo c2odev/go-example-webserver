@@ -12,3 +12,13 @@ test:
     - /var/run/docker.sock:/var/run/docker.sock
   commands:
     - docker run amouat/example-webserver /test.sh
+
+push:
+  image: docker
+  environment:
+    - PASS=${HUB_PASS}
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+   commands:
+   - docker login -u c2odev -p $PASS
+   - docker push c2odev/example-webserver
