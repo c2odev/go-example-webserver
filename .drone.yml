@@ -6,13 +6,6 @@ pipeline:
     commands:
       - docker build -t c2odev/example-webserver .
 
-test:
-  image: docker
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-  commands:
-    - docker run c2odev/example-webserver /test.sh
-
 push:
   image: docker
   environment:
