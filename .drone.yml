@@ -11,7 +11,7 @@ test:
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
   commands:
-    - docker run amouat/example-webserver /test.sh
+    - docker run c2odev/example-webserver /test.sh
 
 push:
   image: docker
@@ -22,3 +22,12 @@ push:
    commands:
    - docker login -u c2odev -p $PASS
    - docker push c2odev/example-webserver
+
+deploy:
+  image: docker
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+  commands:
+    - docker pull c2odev/example-webserver
+    - docker stack deploy -c ./docker-compose.yml example-webserver
+
